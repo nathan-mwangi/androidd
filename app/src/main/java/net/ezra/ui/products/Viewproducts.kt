@@ -85,7 +85,7 @@ fun ProductListScreen(navController: NavController, products: List<Product>) {
         topBar = {
             CenterAlignedTopAppBar(
                 title = {
-                    Text(text = "Products", fontSize = 30.sp, color = Color.White)
+                    Text(text = "View your favorite hotels", fontSize = 15.sp, color = Color.White)
                 },
                 navigationIcon = {
                     IconButton(onClick = {
@@ -99,7 +99,7 @@ fun ProductListScreen(navController: NavController, products: List<Product>) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xFF0FB06A),
+                    containerColor = Color(0xFF34495e),
                     titleContentColor = Color.White,
                 )
             )
@@ -117,12 +117,12 @@ fun ProductListScreen(navController: NavController, products: List<Product>) {
                         contentAlignment = Alignment.Center
                     ) {
                         CircularProgressIndicator(progress = progress / 100f)
-                        Text(text = "Loading... $progress%", fontSize = 20.sp)
+                        Text(text = "View your saved hotels... $progress%", fontSize = 20.sp)
                     }
                 } else {
                     if (productList.isEmpty()) {
                         // No products found
-                        Text(text = "No products found", modifier = Modifier.align(Alignment.CenterHorizontally))
+                        Text(text = "No Hotels found", modifier = Modifier.align(Alignment.CenterHorizontally))
                     } else {
                         // Products list
                         LazyVerticalGrid(columns = GridCells.Fixed(2)) {
@@ -136,11 +136,11 @@ fun ProductListScreen(navController: NavController, products: List<Product>) {
                         // Load More Button
                         if (displayedProductCount < productList.size) {
                             Button(
-                                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF0FB06A)),
+                                colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xffDE3163)),
                                 onClick = { displayedProductCount += 1 },
                                 modifier = Modifier.align(Alignment.CenterHorizontally)
                             ) {
-                                Text(text = "Load More", color = Color.White)
+                                Text(text = "See more", color = Color.LightGray)
                             }
                         }
                     }
@@ -175,7 +175,7 @@ fun ProductListItem(product: Product, onItemClick: (String) -> Unit) {
 
             // Product Details
             Column {
-                Text(text = product.name, color = Color(0xFF0FB06A), fontSize = 16.sp)
+                Text(text = product.name, color = Color(0xFF34495e), fontSize = 16.sp)
                 Text(text = "Price: ${product.price}", color = Color.Gray)
             }
         }
@@ -184,7 +184,7 @@ fun ProductListItem(product: Product, onItemClick: (String) -> Unit) {
 
 private suspend fun fetchProducts(onSuccess: (List<Product>) -> Unit) {
     val firestore = Firebase.firestore
-    val snapshot = firestore.collection("products").get().await()
+    val snapshot = firestore.collection("hotels").get().await()
     val productList = snapshot.documents.mapNotNull { doc ->
         val product = doc.toObject<Product>()
         product?.id = doc.id
@@ -195,7 +195,7 @@ private suspend fun fetchProducts(onSuccess: (List<Product>) -> Unit) {
 
 suspend fun fetchProduct(productId: String, onSuccess: (Product?) -> Unit) {
     val firestore = Firebase.firestore
-    val docRef = firestore.collection("products").document(productId)
+    val docRef = firestore.collection("hotels").document(productId)
     val snapshot = docRef.get().await()
     val product = snapshot.toObject<Product>()
     onSuccess(product)

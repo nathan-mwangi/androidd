@@ -106,18 +106,15 @@ fun TopBar() {
         )
         Spacer(modifier = Modifier.width(8.dp))
         Text(
-            text = "Pattaya, Thailand",
+            text = "View your favorite hotels",
             style = MaterialTheme.typography.body1,
             modifier = Modifier.weight(1f)
         )
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(
-                painter = painterResource(R.drawable.book), // Replace with your notification icon
-                contentDescription = "Notification"
-            )
+
+
         }
     }
-}
+
 
 @Composable
 fun SearchBar() {

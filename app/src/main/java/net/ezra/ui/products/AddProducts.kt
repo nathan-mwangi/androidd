@@ -7,10 +7,9 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -20,7 +19,9 @@ import androidx.compose.material3.CenterAlignedTopAppBar
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.*
-import androidx.compose.ui.*
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -28,11 +29,9 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import coil.compose.rememberImagePainter
 import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.coroutines.tasks.await
-import net.ezra.navigation.ROUTE_ADD_PRODUCT
 import net.ezra.navigation.ROUTE_HOME
 import net.ezra.navigation.ROUTE_VIEW_PROD
 import java.util.*
@@ -46,7 +45,6 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
     var hotelPrice by remember { mutableStateOf("") }
     var productImageUri by remember { mutableStateOf<Uri?>(null) }
 
-    // Track if fields are empty
     var hotelNameError by remember { mutableStateOf(false) }
     var hotelDescriptionError by remember { mutableStateOf(false) }
     var hotelPriceError by remember { mutableStateOf(false) }
@@ -86,10 +84,10 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                 modifier = Modifier
                     .fillMaxSize()
                     .background(Color(0xffF0E68C)) // Light golden background
+                    .padding(16.dp)
             ) {
                 item {
                     if (productImageUri != null) {
-                        // Display selected image
                         Image(
                             painter = rememberImagePainter(productImageUri), // Using rememberImagePainter with Uri
                             contentDescription = null,
@@ -98,7 +96,6 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                                 .height(200.dp)
                         )
                     } else {
-                        // Display placeholder if no image selected
                         Box(
                             modifier = Modifier
                                 .fillMaxWidth()
@@ -110,59 +107,83 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                     }
                     Spacer(modifier = Modifier.height(16.dp))
                     Button(onClick = { launcher.launch("image/*") }) {
-                        Text("Select Image",
+                        Text(
+                            "Select Image",
                             color = Color.Gray
-
                         )
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-                    TextField(
+                    OutlinedTextField(
                         value = hotelName,
                         onValueChange = { hotelName = it },
-                        label = { Text("Hotel Name") },
-                        modifier = Modifier.fillMaxWidth()
+                        label = { Text("Hotel Name", color = Color.White) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.White.copy(alpha = 0.1f)),
+                        isError = hotelNameError,
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            focusedBorderColor = Color.White,
+                            unfocusedBorderColor = Color.White,
+                            textColor = Color.White
+                        )
                     )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    TextField(
-                        value = hotelDescription,
-                        onValueChange = { hotelDescription = it },
-                        label = { Text("Hotel Description") },
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(8.dp))
-                    TextField(
-                        value = hotelPrice,
-                        onValueChange = { hotelPrice = it },
-                        label = { Text("Hotel Price") },
-                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
-                        keyboardActions = KeyboardActions(onDone = { /* Handle Done action */ }),
-                        modifier = Modifier.fillMaxWidth()
-                    )
-                    Spacer(modifier = Modifier.height(16.dp))
-
                     if (hotelNameError) {
                         Text("Hotel Name is required", color = Color.Red)
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = hotelDescription,
+                        onValueChange = { hotelDescription = it },
+                        label = { Text("Hotel Description", color = Color.White) },
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.White.copy(alpha = 0.1f)),
+                        isError = hotelDescriptionError,
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            focusedBorderColor = Color.White,
+                            unfocusedBorderColor = Color.White,
+                            textColor = Color.White
+                        )
+                    )
                     if (hotelDescriptionError) {
                         Text("Hotel Description is required", color = Color.Red)
                     }
+                    Spacer(modifier = Modifier.height(8.dp))
+                    OutlinedTextField(
+                        value = hotelPrice,
+                        onValueChange = { hotelPrice = it },
+                        label = { Text("Hotel Price", color = Color.White) },
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+                        keyboardActions = KeyboardActions(onDone = { /* Handle Done action */ }),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                            .background(Color.White.copy(alpha = 0.1f)),
+                        isError = hotelPriceError,
+                        colors = TextFieldDefaults.outlinedTextFieldColors(
+                            focusedBorderColor = Color.White,
+                            unfocusedBorderColor = Color.White,
+                            textColor = Color.White
+                        )
+                    )
                     if (hotelPriceError) {
                         Text("Hotel Price is required", color = Color.Red)
                     }
+                    Spacer(modifier = Modifier.height(16.dp))
+
                     if (hotelImageError) {
                         Text("Hotel Image is required", color = Color.Red)
                     }
 
-                    // Button to add hotel
                     Button(
                         onClick = {
-                            // Reset error flags
                             hotelNameError = hotelName.isBlank()
                             hotelDescriptionError = hotelDescription.isBlank()
                             hotelPriceError = hotelPrice.isBlank()
                             hotelImageError = productImageUri == null
 
-                            // Add hotel if all fields are filled
                             if (!hotelNameError && !hotelDescriptionError && !hotelPriceError && !hotelImageError) {
                                 addHotelToFirestore(
                                     navController,
@@ -174,9 +195,13 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                                 )
                             }
                         },
-                        modifier = Modifier.fillMaxWidth()
+                        colors = ButtonDefaults.buttonColors(backgroundColor = Color(0xFF3B5998)),
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .clip(RoundedCornerShape(8.dp))
+                            .padding(15.dp)
                     ) {
-                        Text("Add Hotel")
+                        Text("Add Hotel", color = Color.White)
                     }
                 }
             }
@@ -186,7 +211,6 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
 
 private fun addHotelToFirestore(navController: NavController, onProductAdded: () -> Unit, hotelName: String, hotelDescription: String, hotelPrice: Double, hotelImageUri: Uri?) {
     if (hotelName.isEmpty() || hotelDescription.isEmpty() || hotelPrice.isNaN() || hotelImageUri == null) {
-        // Validate input fields
         return
     }
 
@@ -207,17 +231,14 @@ private fun addHotelToFirestore(navController: NavController, onProductAdded: ()
                 firestore.collection("hotels").document(hotelId)
                     .update("imageUrl", imageUrl)
                     .addOnSuccessListener {
-                        // Display toast message
                         Toast.makeText(
                             navController.context,
                             "Hotel added successfully!",
                             Toast.LENGTH_SHORT
                         ).show()
 
-                        // Navigate to another screen
                         navController.navigate(ROUTE_HOME)
 
-                        // Invoke the onProductAdded callback
                         onProductAdded()
                     }
                     .addOnFailureListener { e ->

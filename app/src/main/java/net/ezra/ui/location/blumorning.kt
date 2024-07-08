@@ -65,7 +65,7 @@ fun bmscreen(navHostController: NavHostController) {
         )
 
         Text(
-            text = "$159",
+            text = "$400",
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color(0xFFE91E63),
@@ -99,7 +99,10 @@ fun bmscreen(navHostController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Along with a restaurant, this smoke-free hotel has a fitness center and a bar/lounge. WiFi in public areas is free. Other amenities include 2 coffee shops/cafés, valet parking, and 24-hour room service.",
+            text = "Along with a restaurant, " +
+                    "this smoke-free hotel offers exquisite hospitality as well as make the clients feel at home" +
+                    " WiFi in public areas is free. Other amenities include 2 coffee shops/cafés," +
+                    " valet parking, and 24-hour room service.",
             fontSize = 16.sp,
             color = Color(0xFFB0C4DE),
             modifier = Modifier.padding(horizontal = 8.dp)
