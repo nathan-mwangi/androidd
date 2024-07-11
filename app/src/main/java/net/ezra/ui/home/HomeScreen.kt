@@ -26,7 +26,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -55,7 +54,6 @@ import net.ezra.navigation.ROUTE_SETTINGS
 import net.ezra.navigation.ROUTE_SS
 import net.ezra.navigation.ROUTE_ST
 import net.ezra.navigation.ROUTE_VIEW_PROD
-import net.ezra.ui.students.BottomBar
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -69,7 +67,6 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun HomeScreen(navHostController: NavHostController) {
     Scaffold(
-
         bottomBar = { BottomBar(navController = navHostController) }
     ) { paddingValues ->
         Column(
@@ -110,11 +107,8 @@ fun TopBar() {
             style = MaterialTheme.typography.body1,
             modifier = Modifier.weight(1f)
         )
-
-
-        }
     }
-
+}
 
 //@Composable
 //fun SearchBar() {
@@ -153,7 +147,6 @@ fun TopBar() {
 //        }
 //    }
 //}
-
 
 @Composable
 fun TopCities(navController: NavController) {
@@ -217,39 +210,9 @@ fun TopCities(navController: NavController) {
     Row {
         Card(
             shape = RoundedCornerShape(15.dp),
-            modifier = Modifier.size(170.dp)
-                 .clickable { navController.navigate(ROUTE_HR) }
-            ,
-            elevation = 5.dp
-        ) {
-            Box(
-                modifier = Modifier.height(200.dp)
-            ) {
-                Image(
-                    modifier = Modifier.size(170.dp),
-                    painter = painterResource(id = R.drawable.b1),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(12.dp),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    Text(
-                        color = Color.White,
-                        text = "Hard Rock Hotel"
-                    )
-                }
-            }
-        }
-        Spacer(modifier = Modifier.width(10.dp))
-        Card(
-            shape = RoundedCornerShape(15.dp),
-            modifier = Modifier.size(170.dp)
-                .clickable { navController.navigate(ROUTE_RB) }
-            ,
+            modifier = Modifier
+                .size(170.dp)
+                .clickable { navController.navigate(ROUTE_RB) },
             elevation = 5.dp
         ) {
             Box(
@@ -274,14 +237,12 @@ fun TopCities(navController: NavController) {
                 }
             }
         }
-    }
-
-    Row {
+        Spacer(modifier = Modifier.width(10.dp))
         Card(
             shape = RoundedCornerShape(15.dp),
-            modifier = Modifier.size(170.dp)
-                .clickable { navController.navigate(ROUTE_ST) }
-            ,
+            modifier = Modifier
+                .size(170.dp)
+                .clickable { navController.navigate(ROUTE_ST) },
             elevation = 5.dp
         ) {
             Box(
@@ -306,12 +267,14 @@ fun TopCities(navController: NavController) {
                 }
             }
         }
-        Spacer(modifier = Modifier.width(10.dp))
+    }
+
+    Row {
         Card(
             shape = RoundedCornerShape(15.dp),
-            modifier = Modifier.size(170.dp)
-                .clickable { navController.navigate(ROUTE_OS) }
-            ,
+            modifier = Modifier
+                .size(170.dp)
+                .clickable { navController.navigate(ROUTE_OS) },
             elevation = 5.dp
         ) {
             Box(
@@ -336,15 +299,12 @@ fun TopCities(navController: NavController) {
                 }
             }
         }
-    }
-
-    Row {
+        Spacer(modifier = Modifier.width(10.dp))
         Card(
             shape = RoundedCornerShape(15.dp),
             modifier = Modifier
                 .size(170.dp)
-                .clickable { navController.navigate(ROUTE_ME) }
-            ,
+                .clickable { navController.navigate(ROUTE_MH) },
             elevation = 5.dp
         ) {
             Box(
@@ -364,226 +324,60 @@ fun TopCities(navController: NavController) {
                 ) {
                     Text(
                         color = Color.White,
-                        text = "Masked eater Hotel"
-                    )
-                }
-            }
-        }
-        Spacer(modifier = Modifier.width(10.dp))
-        Card(
-            shape = RoundedCornerShape(15.dp),
-            modifier = Modifier.size(170.dp)
-                .clickable { navController.navigate(ROUTE_BM) }
-            ,
-            elevation = 5.dp
-        ) {
-            Box(
-                modifier = Modifier.height(200.dp)
-            ) {
-                Image(
-                    modifier = Modifier.size(170.dp),
-                    painter = painterResource(id = R.drawable.b6),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(12.dp),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    Text(
-                        color = Color.White,
-                        text = "Blu morning Hotel"
+                        text = "Mistery Hotel"
                     )
                 }
             }
         }
     }
-
-
-    Row {
-        Card(
-            shape = RoundedCornerShape(15.dp),
-            modifier = Modifier.size(170.dp)
-                .clickable { navController.navigate(ROUTE_RC) }
-            ,
-            elevation = 5.dp
-        ) {
-            Box(
-                modifier = Modifier.height(200.dp)
-            ) {
-                Image(
-                    modifier = Modifier.size(170.dp),
-                    painter = painterResource(id = R.drawable.b7),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(12.dp),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    Text(
-                        color = Color.White,
-                        text = "Royal Crest Hotel"
-                    )
-                }
-            }
-        }
-        Spacer(modifier = Modifier.width(10.dp))
-        Card(
-            shape = RoundedCornerShape(15.dp),
-            modifier = Modifier
-                .size(170.dp)
-                .clickable { navController.navigate(ROUTE_RO) },
-
-
-
-
-            elevation = 5.dp,
-
-        ) {
-            Box(
-                modifier = Modifier.height(200.dp)
-            ) {
-                Image(
-                    modifier = Modifier.size(170.dp),
-                    painter = painterResource(id = R.drawable.b8),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(12.dp),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    Text(
-                        color = Color.White,
-                        text = "Regal Oasis"
-                    )
-                }
-            }
-        }
-    }
-
-    Row {
-        Card(
-            shape = RoundedCornerShape(15.dp),
-            modifier = Modifier.size(170.dp)
-                .clickable { navController.navigate(ROUTE_MH) }
-            ,
-            elevation = 5.dp
-        ) {
-            Box(
-                modifier = Modifier.height(200.dp)
-            ) {
-                Image(
-                    modifier = Modifier.size(170.dp),
-                    painter = painterResource(id = R.drawable.b9),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(12.dp),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    Text(
-                        color = Color.White,
-                        text = "Modern Haven"
-                    )
-                }
-            }
-        }
-        Spacer(modifier = Modifier.width(10.dp))
-        Card(
-            shape = RoundedCornerShape(15.dp),
-            modifier = Modifier.size(170.dp)
-                .clickable { navController.navigate(ROUTE_SS) }
-            ,
-            elevation = 5.dp
-        ) {
-            Box(
-                modifier = Modifier.height(200.dp)
-            ) {
-                Image(
-                    modifier = Modifier.size(170.dp),
-                    painter = painterResource(id = R.drawable.b10),
-                    contentDescription = null,
-                    contentScale = ContentScale.Crop
-                )
-                Box(
-                    modifier = Modifier
-                        .fillMaxSize()
-                        .padding(12.dp),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    Text(
-                        color = Color.White,
-                        text = "Sunset Sands Hotel"
-                    )
-                }
-            }
-        }
-    }
-
-
 }
-
-
 
 @Composable
 fun BottomBar(navController: NavController) {
-    val selectedIndex = remember { mutableStateOf(0) }
-    BottomNavigation {
-        BottomNavigationItem(
-            icon = {
-                Icon(
-                    painter = painterResource(id = R.drawable.book), // Replace with your home icon
-                    contentDescription = "Home"
-                )
-            },
-            label = { Text("Home") },
-            selected = selectedIndex.value == 0,
-            onClick = {
-                selectedIndex.value = 0
-                navController.navigate(ROUTE_HOME)
-            }
-        )
-        BottomNavigationItem(
-            icon = {
-                Icon(imageVector = Icons.Default.AccountCircle, contentDescription = null)
-            },
-            label = { Text("Favorites") },
-            selected = selectedIndex.value == 1,
-            onClick = {
-                selectedIndex.value = 1
-                navController.navigate(ROUTE_VIEW_PROD) {
-                    popUpTo(ROUTE_HOME) { inclusive = true }
+    BottomAppBar(
+        backgroundColor = MaterialTheme.colors.surface,
+        contentColor = MaterialTheme.colors.onSurface
+    ) {
+        BottomNavigation {
+            BottomNavigationItem(
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.ShoppingCart,
+                        contentDescription = "Add Product"
+                    )
+                },
+                label = { Text("Add Product") },
+                selected = false,
+                onClick = {
+                    navController.navigate(ROUTE_ADD_PRODUCT) {
+                        popUpTo(ROUTE_HOME) { inclusive = true }
+                    }
                 }
-            }
-        )
-        BottomNavigationItem(
-            icon = {
-                Icon(imageVector = Icons.Default.ShoppingCart, contentDescription = null)
-            },
-            label = { Text("Profile") },
-            selected = selectedIndex.value == 2,
-            onClick = {
-                selectedIndex.value = 2
-                navController.navigate(ROUTE_REGISTER) {
-                    popUpTo(ROUTE_HOME) { inclusive = true }
+            )
+            BottomNavigationItem(
+                icon = {
+                    Icon(
+                        imageVector = Icons.Default.AccountCircle,
+                        contentDescription = "Profile"
+                    )
+                },
+                label = { Text("Profile") },
+                selected = false,
+                onClick = {
+                    navController.navigate(ROUTE_ME) {
+                        popUpTo(ROUTE_HOME) { inclusive = true }
+                    }
                 }
-            }
-        )
+            )
+        }
     }
 }
 
-
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    HomeScreen(navHostController = rememberNavController())
+}
 
 
 
