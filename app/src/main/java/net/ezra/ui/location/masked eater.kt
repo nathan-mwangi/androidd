@@ -53,7 +53,7 @@ fun maskedscreen(navHostController: NavHostController) {
         Spacer(modifier = Modifier.height(16.dp))
 
         Text(
-            text = "Pera Palace Hotel",
+            text = "Masked eater Hotel",
             fontSize = 26.sp,
             fontWeight = FontWeight.Bold,
             color = Color(0xFFFFD700),
@@ -61,7 +61,7 @@ fun maskedscreen(navHostController: NavHostController) {
         )
 
         Text(
-            text = "$159",
+            text = "Ksh 15,000",
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color(0xFFE91E63),

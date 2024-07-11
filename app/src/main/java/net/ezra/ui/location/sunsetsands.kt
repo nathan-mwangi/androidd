@@ -63,7 +63,7 @@ fun ssscreen(navHostController: NavHostController) {
         )
 
         Text(
-            text = "$159",
+            text = "Ksh 17,000",
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color(0xFFE91E63),

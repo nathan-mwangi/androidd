@@ -63,7 +63,7 @@ fun stscreen(navHostController: NavHostController) {
         )
 
         Text(
-            text = "$159",
+            text = "Ksh 8,900",
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color(0xFFE91E63),

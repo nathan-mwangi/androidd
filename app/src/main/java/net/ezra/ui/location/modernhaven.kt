@@ -63,7 +63,7 @@ fun mhscreen(navHostController: NavHostController) {
         )
 
         Text(
-            text = "$159",
+            text = "Ksh 5,500",
             fontSize = 22.sp,
             fontWeight = FontWeight.SemiBold,
             color = Color(0xFFE91E63),
