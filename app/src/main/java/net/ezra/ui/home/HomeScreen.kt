@@ -80,7 +80,7 @@ fun HomeScreen(navHostController: NavHostController) {
                 .padding(16.dp)
         ) {
             Spacer(modifier = Modifier.height(16.dp))
-            SearchBar()
+//            SearchBar()
             Spacer(modifier = Modifier.height(16.dp))
             TopBar()
             Spacer(modifier = Modifier.height(16.dp))
@@ -116,43 +116,43 @@ fun TopBar() {
     }
 
 
-@Composable
-fun SearchBar() {
-    var searchQuery by remember { mutableStateOf("") }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .background(Color.Gray.copy(alpha = 0.1f), RoundedCornerShape(8.dp))
-            .padding(8.dp)
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_person), // Replace with your search icon
-            contentDescription = "Search",
-            modifier = Modifier.size(24.dp)
-        )
-        Spacer(modifier = Modifier.width(8.dp))
-        BasicTextField(
-            value = searchQuery,
-            onValueChange = { searchQuery = it },
-            keyboardOptions = KeyboardOptions.Default.copy(
-                imeAction = ImeAction.Search,
-                keyboardType = KeyboardType.Text
-            ),
-            keyboardActions = KeyboardActions(
-                onSearch = { /* Perform search */ }
-            ),
-            modifier = Modifier
-                .weight(1f)
-                .padding(8.dp)
-        )
-        IconButton(onClick = { /*TODO*/ }) {
-            Icon(
-                painter = painterResource(id = R.drawable.book), // Replace with your microphone icon
-                contentDescription = "null"
-            )
-        }
-    }
-}
+//@Composable
+//fun SearchBar() {
+//    var searchQuery by remember { mutableStateOf("") }
+//    Row(
+//        modifier = Modifier
+//            .fillMaxWidth()
+//            .background(Color.Gray.copy(alpha = 0.1f), RoundedCornerShape(8.dp))
+//            .padding(8.dp)
+//    ) {
+//        Icon(
+//            painter = painterResource(id = R.drawable.ic_person), // Replace with your search icon
+//            contentDescription = "Search",
+//            modifier = Modifier.size(24.dp)
+//        )
+//        Spacer(modifier = Modifier.width(8.dp))
+//        BasicTextField(
+//            value = searchQuery,
+//            onValueChange = { searchQuery = it },
+//            keyboardOptions = KeyboardOptions.Default.copy(
+//                imeAction = ImeAction.Search,
+//                keyboardType = KeyboardType.Text
+//            ),
+//            keyboardActions = KeyboardActions(
+//                onSearch = { /* Perform search */ }
+//            ),
+//            modifier = Modifier
+//                .weight(1f)
+//                .padding(8.dp)
+//        )
+//        IconButton(onClick = { /*TODO*/ }) {
+//            Icon(
+//                painter = painterResource(id = R.drawable.book), // Replace with your microphone icon
+//                contentDescription = "null"
+//            )
+//        }
+//    }
+//}
 
 
 @Composable

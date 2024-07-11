@@ -18,21 +18,34 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import coil.compose.rememberImagePainter
 import net.ezra.R
 import net.ezra.navigation.ROUTE_ADD_PRODUCT
 
+//const val ROUTE_ADD_PRODUCT = "add_product"
+
 class BranchActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-          hardrockscreen(navHostController = rememberNavController())
+            hardrockscreen(navHostController = rememberNavController())
+            val navController = rememberNavController()
+//            SetupNavGraph(navController)
         }
     }
 }
+
+//@Composable
+//fun SetupNavGraph(navController: NavHostController) {
+//    NavHost(navController = navController, startDestination = "home") {
+//        composable("home") { hardrockscreen(navController) }
+//        composable(ROUTE_ADD_PRODUCT) { AddProductScreen() }
+//    }
+//}
 
 @Composable
 fun hardrockscreen(navHostController: NavHostController) {
@@ -117,6 +130,11 @@ fun hardrockscreen(navHostController: NavHostController) {
             Text(text = "Book Now", fontSize = 18.sp, color = Color.White)
         }
     }
+}
+
+@Composable
+fun AddProductScreen() {
+    // Your composable code for adding a product
 }
 
 @Composable

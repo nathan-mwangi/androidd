@@ -22,6 +22,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
@@ -83,7 +84,18 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
             LazyColumn(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xffF0E68C)) // Light golden background
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                              Color(0xFF3B5998) ,
+                                Color(0xFF8B9DC3)
+
+                            )
+
+                        )
+
+                    )
+
                     .padding(16.dp)
             ) {
                 item {
@@ -106,7 +118,8 @@ fun AddProductScreen(navController: NavController, onProductAdded: () -> Unit) {
                         }
                     }
                     Spacer(modifier = Modifier.height(16.dp))
-                    Button(onClick = { launcher.launch("image/*") }) {
+                    Button(onClick =
+                    { launcher.launch("image/*") }) {
                         Text(
                             "Select Image",
                             color = Color.Gray

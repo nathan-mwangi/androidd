@@ -23,8 +23,6 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import com.google.firebase.auth.FirebaseAuth
 import net.ezra.R
-import net.ezra.navigation.ROUTE_ADD_PRODUCT
-import net.ezra.navigation.ROUTE_HOME
 import net.ezra.navigation.ROUTE_LOGIN
 import net.ezra.navigation.ROUTE_REGISTER
 
@@ -145,6 +143,9 @@ fun SignUpScreen(navController: NavController, onSignUpSuccess: () -> Unit) {
                                 isLoading = false
                                 Toast.makeText(context, "Sign-up successful!", Toast.LENGTH_SHORT).show()
                                 onSignUpSuccess()
+                                navController.navigate(ROUTE_LOGIN) {
+                                    popUpTo(ROUTE_REGISTER) { inclusive = true }
+                                }
                             }) { errorMessage ->
                                 isLoading = false
                                 error = errorMessage
@@ -155,19 +156,7 @@ fun SignUpScreen(navController: NavController, onSignUpSuccess: () -> Unit) {
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(8.dp))
                 ) {
-                    Text("Sign Up", color = Color.White,
-
-                        modifier = Modifier
-                            .clickable { navController.navigate(ROUTE_ADD_PRODUCT){
-                                popUpTo(ROUTE_REGISTER){inclusive = true}
-                            }
-
-
-                            }
-
-
-
-                    )
+                    Text("Sign Up", color = Color.White)
                 }
 
                 Text(

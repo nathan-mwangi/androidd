@@ -26,8 +26,10 @@ import com.google.firebase.auth.FirebaseAuth
 import net.ezra.R
 import net.ezra.navigation.ROUTE_ADD_PRODUCT
 import net.ezra.navigation.ROUTE_DASHBOARD
+import net.ezra.navigation.ROUTE_HOME
 import net.ezra.navigation.ROUTE_LOGIN
 import net.ezra.navigation.ROUTE_REGISTER
+import net.ezra.navigation.ROUTE_SIGNUP
 
 @Composable
 fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
@@ -128,7 +130,7 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
                                     if (task.isSuccessful) {
                                         Toast.makeText(context, "Login successful!", Toast.LENGTH_SHORT).show()
                                         onLoginSuccess()
-                                        navController.navigate(ROUTE_ADD_PRODUCT) {
+                                        navController.navigate(ROUTE_HOME) {
                                             popUpTo(ROUTE_LOGIN) { inclusive = true }
                                         }
                                     } else {
@@ -141,7 +143,12 @@ fun LoginScreen(navController: NavController, onLoginSuccess: () -> Unit) {
                         .fillMaxWidth()
                         .clip(RoundedCornerShape(8.dp))
                 ) {
-                    Text("Login", color = Color.White)
+                    Text("Login", color = Color.White,
+                        modifier = Modifier
+                            .clickable{navController.navigate(ROUTE_HOME)
+                            {popUpTo(ROUTE_REGISTER){inclusive = true} }
+                            }
+                    )
                 }
 
                 Text(

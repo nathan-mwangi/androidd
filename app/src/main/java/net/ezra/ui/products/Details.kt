@@ -66,7 +66,7 @@ fun ProductDetailScreen(navController: NavController, productId: String) {
                     )
                 },
                 navigationIcon = {
-            IconButton(onClick = {
+                    IconButton(onClick = {
                         navController.navigate(ROUTE_VIEW_PROD)
                     }) {
                         Icon(
@@ -77,7 +77,7 @@ fun ProductDetailScreen(navController: NavController, productId: String) {
                     }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
-                    containerColor = Color(0xff0FB06A),
+                    containerColor = Color(0xff3B5998),
                     titleContentColor = Color.White,
                 )
             )
@@ -86,14 +86,14 @@ fun ProductDetailScreen(navController: NavController, productId: String) {
             Column(
                 modifier = Modifier
                     .fillMaxSize()
-                    .background(Color(0xff9AEDC9)),
+                    .background(Color(0xff8B9DC3)),
             ) {
                 product?.let {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Image(
                             painter = rememberAsyncImagePainter(it.imageUrl),
                             contentDescription = null,
-                            modifier = Modifier.size(60.dp)
+                            modifier = Modifier.size(200.dp)
                         )
                         Text(text = it.name, style = MaterialTheme.typography.h5)
                         Spacer(modifier = Modifier.height(8.dp))
